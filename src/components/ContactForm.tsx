@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ContactFormData } from '@/types/contact';
 
 export default function ContactForm() {
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: '',
     email: '',
@@ -46,8 +47,13 @@ export default function ContactForm() {
       return;
     }
 
-    // TODO: Implement form submission logic
-    console.log('Form submitted:', formData);
+    // Show success message
+    setShowSuccess(true);
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 3000);
   };
 
   const handleChange = (
@@ -68,6 +74,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6 p-6">
+      {showSuccess && (
+        <div className="mb-4 p-4 bg-green-50 text-green-700 rounded-md">
+          Your message has been sent! We will get back to you as soon as possible.
+        </div>
+      )}
       <div>
         <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
           Full Name *
@@ -121,12 +132,13 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-          Message
+          Message *
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
+          required
           className="mt-1 block w-full rounded-md border border-gray-200 min-h-[120px] p-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.message}
           onChange={handleChange}
