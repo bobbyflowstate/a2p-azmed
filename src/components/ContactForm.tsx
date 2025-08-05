@@ -39,7 +39,7 @@ export default function ContactForm() {
           id="fullName"
           name="fullName"
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.fullName}
           onChange={handleChange}
         />
@@ -54,7 +54,7 @@ export default function ContactForm() {
           id="email"
           name="email"
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.email}
           onChange={handleChange}
         />
@@ -68,7 +68,7 @@ export default function ContactForm() {
           type="tel"
           id="phone"
           name="phone"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.phone}
           onChange={handleChange}
         />
@@ -82,7 +82,7 @@ export default function ContactForm() {
           id="message"
           name="message"
           rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border border-gray-200 min-h-[120px] p-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.message}
           onChange={handleChange}
         />
@@ -95,7 +95,7 @@ export default function ContactForm() {
             name="consent"
             type="checkbox"
             required
-            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            className="h-5 w-5 rounded border border-gray-200 text-gray-600 focus:ring-0 focus:border-black"
             checked={formData.consent}
             onChange={handleChange}
           />
