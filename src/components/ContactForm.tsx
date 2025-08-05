@@ -12,8 +12,40 @@ export default function ContactForm() {
     consent: false,
   });
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    // Allow empty phone since it's optional
+    if (!phone) return true;
+    // Remove all non-numeric characters
+    const cleanPhone = phone.replace(/\D/g, '');
+    // Check if it's a valid US phone number (10 digits)
+    return cleanPhone.length === 10;
+  };
+
+  const formatPhoneNumber = (phone: string): string => {
+    const cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length <= 3) return cleaned;
+    if (cleaned.length <= 6) return `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+    return `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateEmail(formData.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    if (formData.phone && !validatePhone(formData.phone)) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
+
     // TODO: Implement form submission logic
     console.log('Form submitted:', formData);
   };
@@ -22,10 +54,16 @@ export default function ContactForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }));
+    
+    if (name === 'phone') {
+      const formattedPhone = formatPhoneNumber(value);
+      setFormData((prev) => ({ ...prev, phone: formattedPhone }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+      }));
+    }
   };
 
   return (
@@ -54,6 +92,9 @@ export default function ContactForm() {
           id="email"
           name="email"
           required
+          pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          title="Please enter a valid email address"
+          aria-describedby="email-hint"
           className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.email}
           onChange={handleChange}
@@ -68,6 +109,10 @@ export default function ContactForm() {
           type="tel"
           id="phone"
           name="phone"
+          pattern="[0-9-]*"
+          title="Please enter a valid phone number (e.g., 123-456-7890)"
+          aria-describedby="phone-hint"
+          placeholder="123-456-7890"
           className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.phone}
           onChange={handleChange}
