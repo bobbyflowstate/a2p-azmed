@@ -62,7 +62,7 @@ export default function Home() {
       <Locations />
 
       {/* Accident Guide Section */}
-      <section className="py-12 bg-gray-50">
+      <section id="after-accident" className="py-12 bg-gray-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             What to Do After an Accident

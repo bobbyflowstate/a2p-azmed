@@ -31,6 +31,18 @@ export default function Footer() {
             </h3>
             <div className="space-y-2">
               <Link
+                href="/"
+                className="block text-gray-600 hover:text-blue-600"
+              >
+                Home
+              </Link>
+              <Link
+                href="/#after-accident"
+                className="block text-gray-600 hover:text-blue-600"
+              >
+                After an Incident
+              </Link>
+              <Link
                 href="/contact"
                 className="block text-gray-600 hover:text-blue-600"
               >

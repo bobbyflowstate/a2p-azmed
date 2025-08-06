@@ -14,8 +14,7 @@ export default function ContactPage() {
             Contact Arizona Integrated Medical
           </h1>
           <p className="text-xl text-gray-600">
-            Use this form to request an appointment or ask a question.
-            By submitting, you consent to receive text communications related to your inquiry.
+            Leave your phone number and we'll contact you to discuss your needs and schedule an appointment.
           </p>
         </div>
       </section>

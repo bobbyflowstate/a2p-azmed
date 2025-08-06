@@ -2,28 +2,17 @@
 
 import { useState } from 'react';
 import { ContactFormData } from '@/types/contact';
+import Link from 'next/link';
 
 export default function ContactForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
-    fullName: '',
-    email: '',
     phone: '',
-    message: '',
-    consent: false,
+    smsConsent: false,
   });
 
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
-
   const validatePhone = (phone: string): boolean => {
-    // Allow empty phone since it's optional
-    if (!phone) return true;
-    // Remove all non-numeric characters
     const cleanPhone = phone.replace(/\D/g, '');
-    // Check if it's a valid US phone number (10 digits)
     return cleanPhone.length === 10;
   };
 
@@ -37,12 +26,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateEmail(formData.email)) {
-      alert('Please enter a valid email address');
-      return;
-    }
-
-    if (formData.phone && !validatePhone(formData.phone)) {
+    if (!validatePhone(formData.phone)) {
       alert('Please enter a valid 10-digit phone number');
       return;
     }
@@ -57,9 +41,9 @@ export default function ContactForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const { name, value, type } = e.target;
+    const { name, value, type, checked } = e.target;
     
     if (name === 'phone') {
       const formattedPhone = formatPhoneNumber(value);
@@ -67,7 +51,7 @@ export default function ContactForm() {
     } else {
       setFormData((prev) => ({
         ...prev,
-        [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+        [name]: type === 'checkbox' ? checked : value,
       }));
     }
   };
@@ -76,53 +60,21 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6 p-6">
       {showSuccess && (
         <div className="mb-4 p-4 bg-green-50 text-green-700 rounded-md">
-          Your message has been sent! We will get back to you as soon as possible.
+          We've received your number! We will get back to you as soon as possible.
         </div>
       )}
-      <div>
-        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-          Full Name *
-        </label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          required
-          className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
-          value={formData.fullName}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          Email *
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-          title="Please enter a valid email address"
-          aria-describedby="email-hint"
-          className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
-          value={formData.email}
-          onChange={handleChange}
-        />
-      </div>
 
       <div>
         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-          Phone (optional)
+          Phone Number *
         </label>
         <input
           type="tel"
           id="phone"
           name="phone"
+          required
           pattern="[0-9-]*"
           title="Please enter a valid phone number (e.g., 123-456-7890)"
-          aria-describedby="phone-hint"
           placeholder="123-456-7890"
           className="mt-1 block w-full rounded-md border border-gray-200 h-12 px-4 focus:border-black focus:ring-0 text-gray-900"
           value={formData.phone}
@@ -130,38 +82,32 @@ export default function ContactForm() {
         />
       </div>
 
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-          Message *
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          required
-          className="mt-1 block w-full rounded-md border border-gray-200 min-h-[120px] p-4 focus:border-black focus:ring-0 text-gray-900"
-          value={formData.message}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="flex items-start">
-        <div className="flex items-center h-5">
-          <input
-            id="consent"
-            name="consent"
-            type="checkbox"
-            required
-            className="h-5 w-5 rounded border border-gray-200 text-gray-600 focus:ring-0 focus:border-black"
-            checked={formData.consent}
-            onChange={handleChange}
-          />
+      <div className="space-y-4">
+        <div className="flex items-start">
+          <div className="flex items-center h-5">
+            <input
+              id="smsConsent"
+              name="smsConsent"
+              type="checkbox"
+              required
+              className="h-5 w-5 rounded border border-gray-200 text-gray-600 focus:ring-0 focus:border-black"
+              checked={formData.smsConsent}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="ml-3">
+            <label htmlFor="smsConsent" className="text-sm text-gray-700">
+              I consent to receive appointment-related SMS messages from Arizona Integrated Medical. Message & data rates may apply. Reply STOP to opt out.
+            </label>
+          </div>
         </div>
-        <div className="ml-3 text-sm">
-          <label htmlFor="consent" className="font-medium text-gray-700">
-            I have read and agree to the Privacy Policy and Terms of Service,
-            and I consent to receive text communications related to my inquiry.
-          </label>
+
+        <div className="text-sm text-gray-500">
+          By continuing, you agree to our{' '}
+          <Link href="/privacy" className="text-blue-600 hover:text-blue-800">
+            Privacy Policy
+          </Link>
+          .
         </div>
       </div>
 
