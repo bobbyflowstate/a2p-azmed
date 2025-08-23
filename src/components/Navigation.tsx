@@ -8,15 +8,17 @@ export default function Navigation() {
 
   return (
     <nav className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
             <Link href="/" className="text-left">
               <h1 className="text-xl font-bold text-gray-900">
                 Arizona Integrated Medical
               </h1>
               <p className="text-sm text-gray-600">
-                Owned and operated by [Legal Entity LLC]
+                Owned and operated by Arizona Integrated Medical, LLC<br/>
+                2503 S. Ave A, Suite 1 Yuma, AZ 85364<br/>
+                3201 W. Peoria Ave, Suite D704 Phoenix AZ 85029
               </p>
             </Link>
           </div>

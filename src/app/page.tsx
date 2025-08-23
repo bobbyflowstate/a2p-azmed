@@ -33,7 +33,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">About Us</h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-8">
-            Arizona Integrated Medical is owned and operated by [Legal Entity LLC].
+            Arizona Integrated Medical is owned and operated by Arizona Integrated Medical, LLC.
             Our team's focus is to help patients recover mobility, reduce pain, and
             return to daily life with personalized treatment. We take pride in providing
             comprehensive care that addresses your specific needs.
