@@ -109,7 +109,7 @@ export default function ContactForm() {
           </Link>
           {' '}and{' '}
           <Link href="/terms" className="text-blue-600 hover:text-blue-800">
-            terms and conditions
+            Terms of Service
           </Link>
           .
         </div>
