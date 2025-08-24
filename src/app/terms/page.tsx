@@ -71,6 +71,15 @@ export default function TermsPage() {
                 We may update these Terms of Service at any time. Continued use of this site means you agree to the updated terms.
               </p>
             </section>
+
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-3">
+                7. SMS Messaging
+              </h2>
+              <p className="text-gray-600">
+                By providing your phone number, you consent to receive appointment-related SMS messages from Arizona Integrated Medical. Message and data rates may apply. Reply STOP to opt out at any time, or HELP for assistance. Carriers are not liable for delayed or undelivered messages.
+              </p>
+            </section>
           </div>
 
           <p className="text-sm text-gray-500 mt-12 pt-4 border-t">

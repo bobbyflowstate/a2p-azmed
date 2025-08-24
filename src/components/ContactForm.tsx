@@ -107,6 +107,10 @@ export default function ContactForm() {
           <Link href="/privacy" className="text-blue-600 hover:text-blue-800">
             Privacy Policy
           </Link>
+          {' '}and{' '}
+          <Link href="/terms" className="text-blue-600 hover:text-blue-800">
+            Terms of Service
+          </Link>
           .
         </div>
       </div>
