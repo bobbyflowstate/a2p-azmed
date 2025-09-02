@@ -1,4 +1,5 @@
 export interface ContactFormData {
   phone: string;
-  smsConsent: boolean;
+  marketingConsent: boolean;
+  nonmarketingConsent: boolean;
 }
