@@ -90,6 +90,7 @@ export default function ContactForm() {
               id="marketingConsent"
               name="marketingConsent"
               type="checkbox"
+              required
               className="h-5 w-5 rounded border border-gray-200 text-gray-600 focus:ring-0 focus:border-black"
               checked={formData.marketingConsent}
               onChange={handleChange}
