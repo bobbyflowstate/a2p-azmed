@@ -8,7 +8,8 @@ export default function ContactForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<ContactFormData>({
     phone: '',
-    smsConsent: false,
+    marketingConsent: false,
+    nonmarketingConsent: false,
   });
 
   const validatePhone = (phone: string): boolean => {
@@ -86,18 +87,38 @@ export default function ContactForm() {
         <div className="flex items-start">
           <div className="flex items-center h-5">
             <input
-              id="smsConsent"
-              name="smsConsent"
+              id="marketingConsent"
+              name="marketingConsent"
               type="checkbox"
-              required
               className="h-5 w-5 rounded border border-gray-200 text-gray-600 focus:ring-0 focus:border-black"
-              checked={formData.smsConsent}
+              checked={formData.marketingConsent}
               onChange={handleChange}
             />
           </div>
           <div className="ml-3">
-            <label htmlFor="smsConsent" className="text-sm text-gray-700">
-              I consent to receive appointment-related SMS messages from Arizona Integrated Medical. Message & data rates may apply. Reply STOP to opt out.
+            <label htmlFor="marketingConsent" className="text-sm text-gray-700">
+              I consent to receive marketing text messages from Arizona Integrated Medical LLC at the phone number provided. 
+              Frequency may vary. Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
+            </label>
+          </div>
+        </div>
+
+        <div className="flex items-start">
+          <div className="flex items-center h-5">
+            <input
+              id="nonmarketingConsent"
+              name="nonmarketingConsent"
+              type="checkbox"
+              required
+              className="h-5 w-5 rounded border border-gray-200 text-gray-600 focus:ring-0 focus:border-black"
+              checked={formData.nonmarketingConsent}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="ml-3">
+            <label htmlFor="nonmarketingConsent" className="text-sm text-gray-700">
+              I consent to receive non-marketing text messages from Arizona Integrated Medical LLC about my order updates, 
+              appointment reminders, etc. Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
             </label>
           </div>
         </div>
