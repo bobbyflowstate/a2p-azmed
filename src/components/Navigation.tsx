@@ -16,7 +16,7 @@ export default function Navigation() {
                 Arizona Integrated Medical
               </h1>
               <p className="text-sm text-gray-600">
-                Owned and operated by Arizona Integrated Medical, LLC<br/>
+                Owned and operated by Arizona Integrated Medical LLC<br/>
                 2503 S. Ave A, Suite 1 Yuma, AZ 85364<br/>
                 3201 W. Peoria Ave, Suite D704 Phoenix AZ 85029
               </p>
